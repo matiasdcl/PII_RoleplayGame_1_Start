@@ -1,6 +1,6 @@
 namespace Library;
 
-public class Hechigzo
+public class Hechizo
 {
     public string Nombre { get; }
     public int Vida { get; }
