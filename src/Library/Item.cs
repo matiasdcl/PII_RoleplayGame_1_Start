@@ -8,13 +8,8 @@ public class Item
 
     public Item(string nombre, int defensa, int ataque)
     {
-        string caracteresPermitidos = "qQwWeErRtTyYuUiIoOpPsSaAdDFfGgHhJjKkLlÑñZzXxCcVvBbNnMm";
-        foreach (char caracter in nombre)
-        {
-            if(!caracteresPermitidos.Contains(caracter)){ 
-                throw new ArgumentException("Nombre inválido");
-            }
-        }
+        Herramientas.ValidarNombre(nombre);
+        
         this.Nombre = nombre;
         if (defensa < 0 || ataque < 0)
         {

@@ -1,1 +1,10 @@
-﻿Console.WriteLine("Hello, World!");
+﻿namespace Library;
+
+class Program
+{
+    public static void Main()
+    {
+
+    } 
+}
+
