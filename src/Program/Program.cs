@@ -1,11 +1,12 @@
 ﻿namespace Library;
 
-class Program{
+public class Program
+{
     public static void Main()
     {
-        Enano tato = new Enano("Tato");
-        Console.WriteLine(tato.Nombre);
-        Console.WriteLine(tato.Vida);
-        Console.WriteLine(tato.Ataque);
+        Item espada = new Item("pepe", 200, 100);
+        Console.WriteLine(espada.Ataque);
     }
 }
+
+
