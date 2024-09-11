@@ -62,6 +62,8 @@ public class Orco
         if (!this.items.Contains(item))
         {
             this.items.Add(item);
+            this.Vida += item.Defensa;
+            this.Ataque += item.Ataque;
         }
     }
 
@@ -72,6 +74,8 @@ public class Orco
             if (elemento == item)
             {
                 this.items.Remove(elemento);
+                this.Vida -= item.Defensa;
+                this.Ataque -= item.Ataque;
             }
         }
     }

@@ -1,6 +1,6 @@
 namespace Library;
 
-public class Elfo
+public class Mago
 {
     private int vida;
     private int ataque;
@@ -43,10 +43,10 @@ public class Elfo
             this.nombre = value;
         }
     }
-    public Elfo(string nombre)
+    public Mago(string nombre)
     {
-        this.vida = 150;
-        this.ataque = 40;
+        this.vida = 90;
+        this.ataque = 150;
         Herramientas.ValidarNombre(nombre);
         this.nombre = nombre;
     }
