@@ -9,13 +9,10 @@ public class Item
     public Item(string nombre, int defensa, int ataque)
     {
         Herramientas.ValidarNombre(nombre);
-        
         this.Nombre = nombre;
-        if (defensa < 0 || ataque < 0)
-        {
-            throw new AggregateException("Valor de defensa o ataque inválidos");
-        }
+        Herramientas.ValidarEstadistica(defensa);
         this.Defensa = defensa;
+        Herramientas.ValidarEstadistica(ataque);
         this.Ataque = ataque;
     }
 }

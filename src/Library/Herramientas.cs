@@ -18,4 +18,12 @@ public class Herramientas
             throw new ArgumentException("Nombre inválido");
         }
     }
+
+    public static void ValidarEstadistica(int estadistica)
+    {
+        if (estadistica < 0)
+        {
+            throw new AggregateException("Valor de defensa o ataque inválidos");
+        }
+    }
 }
