@@ -6,9 +6,10 @@ public class Orco
     private string nombre;
     private int vida;
     private int ataque;
+    private int defensa;
     private List<Item> items;
 
-    public string Nombre
+    private string Nombre
     {
         get { return nombre; }
         set
@@ -17,7 +18,7 @@ public class Orco
             nombre = value;}
     }
 
-    public int Vida
+    private int Vida
     {
         get { return vida; }
         set
@@ -33,7 +34,7 @@ public class Orco
         }
     }
 
-    public int Ataque
+    private int Ataque
     {
         get { return ataque; }
         set
@@ -42,28 +43,63 @@ public class Orco
             ataque = value;
         }
     }
-
-    public List<Item> Items
+    
+    private int Defensa
     {
-        get { return items; }
-        set { items = value; }
+        get { return this.defensa; }
+        set
+        {
+            Herramientas.ValidarEstadistica(value);
+            this.defensa = value;
+        }
     }
 
     public Orco(string nombre)
     {
-        this.nombre = nombre;
         ataque = 35;
         vida = 220;
-        items = new List<Item>();
+        defensa = 0;
+        Herramientas.ValidarNombre(nombre);
+        this.nombre = nombre;
     }
 
+    public int GetVidaActual()
+    {
+        return this.vida;
+    }
+
+    public string GetNombre()
+    {
+        return this.nombre;
+    }
+    
+    public int GetDefensa()
+    {
+        return this.defensa;
+    }
+    
+    public int GetAtaque()
+    {
+        return this.ataque;
+    }
+
+    public int GetDaño(int danoRealizado)
+    {
+        return this.vida -= danoRealizado;
+    }
+
+    public List<Item> GetEquipedItems()
+    {
+        return this.items;
+    }
+    
     public void EquiparItem(Item item)
     {
         if (!this.items.Contains(item))
         {
             this.items.Add(item);
-            this.Vida += item.Defensa;
-            this.Ataque += item.Ataque;
+            this.defensa += item.GetDefensa();
+            this.ataque += item.GetDefensa();
         }
     }
 
@@ -74,30 +110,61 @@ public class Orco
             if (elemento == item)
             {
                 this.items.Remove(elemento);
-                this.Vida -= item.Defensa;
-                this.Ataque -= item.Ataque;
+                this.defensa -= item.GetDefensa();
+                this.ataque -= item.GetAtaque();
             }
         }
     }
     
     public void AtacarElfo(Elfo elfo)
     {
-        elfo.Vida -= this.Ataque;
+        if (this.ataque < elfo.GetDefensa())
+        {
+            Console.WriteLine("El ataque no pudo ser concretado");
+        }
+        else
+        {
+            int danoRealizado = this.ataque - elfo.GetDefensa();
+            elfo.GetDaño(danoRealizado);
+        }
     }
     
     public void AtacarEnano(Enano enano)
     {
-        enano.Vida -= this.Ataque;
+        if (this.Ataque < enano.GetDefensa())
+        {
+            Console.WriteLine("El ataque no pudo ser concretado");
+        }
+        else
+        {
+            int danoRealizado = this.ataque - enano.GetDefensa();
+            enano.GetDaño(danoRealizado);
+        }
     }
     
     public void AtacarOrco(Orco orco)
     {
-        orco.Vida -= this.Ataque;
+        if (this.Ataque < orco.GetDefensa())
+        {
+            Console.WriteLine("El ataque no pudo ser concretado");
+        }
+        else
+        {
+            int danoRealizado = this.ataque - orco.GetDefensa();
+            orco.GetDaño(danoRealizado);
+        }
     }
     
     public void AtacarMago(Mago mago)
     {
-        mago.Vida -= this.Ataque;
+        if (this.Ataque < mago.GetDefensa())
+        {
+            Console.WriteLine("El ataque no pudo ser concretado");
+        }
+        else
+        {
+            int danoRealizado = this.ataque - mago.GetDefensa();
+            mago.GetDaño(danoRealizado);
+        }
     }
-    
 }

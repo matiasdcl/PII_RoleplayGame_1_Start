@@ -5,10 +5,11 @@ public class Enano
 {
     private string nombre;
     private int vida;
+    private int defensa;
     private int ataque;
     private List<Item> items;
 
-    public string Nombre
+    private string Nombre
     {
         get { return nombre; }
         set
@@ -17,7 +18,7 @@ public class Enano
             nombre = value;}
     }
 
-    public int Vida
+    private int Vida
     {
         get { return vida; }
         set
@@ -33,7 +34,7 @@ public class Enano
         }
     }
 
-    public int Ataque
+    private int Ataque
     {
         get { return ataque; }
         set
@@ -43,18 +44,53 @@ public class Enano
         }
     }
 
-    public List<Item> Items
+    private int Defensa
     {
-        get { return items; }
-        set { items = value; }
+        get { return this.defensa; }
+        set
+        {
+            Herramientas.ValidarEstadistica(value);
+            this.defensa = value;
+        }
     }
 
     public Enano(string nombre)
     {
+        this.ataque = 40;
+        this.defensa = 0;
+        this.vida = 200; 
+        Herramientas.ValidarNombre(nombre);
         this.nombre = nombre;
-        ataque = 40;
-        vida = 200;
-        items = new List<Item>();
+    }
+    
+    public int GetVidaActual()
+    {
+        return this.vida;
+    }
+
+    public string GetNombre()
+    {
+        return this.nombre;
+    }
+    
+    public int GetDefensa()
+    {
+        return this.defensa;
+    }
+    
+    public int GetAtaque()
+    {
+        return this.ataque;
+    }
+
+    public int GetDaño(int danoRealizado)
+    {
+        return this.vida -= danoRealizado;
+    }
+    
+    public List<Item> GetEquipedItems()
+    {
+        return this.items;
     }
 
     public void EquiparItem(Item item)
@@ -62,8 +98,8 @@ public class Enano
         if (!this.items.Contains(item))
         {
             this.items.Add(item);
-            this.Vida += item.Defensa;
-            this.Ataque += item.Ataque;
+            this.Vida += item.GetDefensa();
+            this.Ataque += item.GetAtaque();
         }
     }
 
@@ -74,30 +110,60 @@ public class Enano
             if (elemento == item)
             {
                 this.items.Remove(elemento);
-                this.Vida -= item.Defensa;
-                this.Ataque -= item.Ataque;
+                this.Vida -= item.GetDefensa();
+                this.Ataque -= item.GetAtaque();
             }
         }
     }
     
     public void AtacarElfo(Elfo elfo)
     {
-        elfo.Vida -= this.Ataque;
+        if (this.ataque < elfo.GetDefensa())
+        {
+            Console.WriteLine("El ataque no pudo ser concretado");
+        }
+        else
+        {
+            int danoRealizado = this.ataque - elfo.GetDefensa();
+            elfo.GetDaño(danoRealizado);
+        }
     }
     
     public void AtacarEnano(Enano enano)
     {
-        enano.Vida -= this.Ataque;
+        if (this.Ataque < enano.GetDefensa())
+        {
+            Console.WriteLine("El ataque no pudo ser concretado");
+        }
+        else
+        {
+            int danoRealizado = this.ataque - enano.GetDefensa();
+            enano.GetDaño(danoRealizado);
+        }
     }
     
     public void AtacarOrco(Orco orco)
     {
-        orco.Vida -= this.Ataque;
-    }
+        if (this.Ataque < orco.GetDefensa())
+        {
+            Console.WriteLine("El ataque no pudo ser concretado");
+        }
+        else
+        {
+            int danoRealizado = this.ataque - orco.GetDefensa();
+            orco.GetDaño(danoRealizado);
+        }    }
     
     public void AtacarMago(Mago mago)
     {
-        mago.Vida -= this.Ataque;
+        if (this.Ataque < mago.GetDefensa())
+        {
+            Console.WriteLine("El ataque no pudo ser concretado");
+        }
+        else
+        {
+            int danoRealizado = this.ataque - mago.GetDefensa();
+            mago.GetDaño(danoRealizado);
+        }
     }
-    
 }

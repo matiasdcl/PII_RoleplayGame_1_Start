@@ -4,11 +4,12 @@ public class Mago
 {
     private int vida;
     private int ataque;
+    private int defensa;
     private string nombre;
     private List<Item> items = new List<Item>();
     private List<LibroDeHechizos> libros = new List<LibroDeHechizos>();
 
-    public int Vida
+    private int Vida
     {
         get { return this.vida; }
         set
@@ -24,7 +25,7 @@ public class Mago
         }
     }
 
-    public int Ataque
+    private int Ataque
     {
         get { return this.ataque; }
         set
@@ -34,7 +35,17 @@ public class Mago
         }
     }
 
-    public string Nombre
+    private int Defensa
+    {
+        get { return this.defensa; }
+        set
+        {
+            Herramientas.ValidarEstadistica(value);
+            this.defensa = value;
+        }
+    }
+    
+    private string Nombre
     {
         get { return this.nombre; }
         set
@@ -43,21 +54,58 @@ public class Mago
             this.nombre = value;
         }
     }
+    
     public Mago(string nombre)
     {
         this.vida = 90;
         this.ataque = 150;
+        this.defensa = 0;
         Herramientas.ValidarNombre(nombre);
         this.nombre = nombre;
     }
 
+    public int GetVidaActual()
+    {
+        return this.vida;
+    }
+
+    public string GetNombre()
+    {
+        return this.nombre;
+    }
+    
+    public int GetDefensa()
+    {
+        return this.defensa;
+    }
+    
+    public int GetAtaque()
+    {
+        return this.ataque;
+    }
+
+    public int GetDaño(int danoRealizado)
+    {
+        return this.vida -= danoRealizado;
+    }
+    
+    public List<Item> GetEquipedItems()
+    {
+        return this.items;
+    }
+    
+    public List<LibroDeHechizos> GetEquipedLibros()
+    {
+        return this.libros;
+    }
+    
     public void EquiparItem(Item item)
     {
         if (!this.items.Contains(item))
         {
             this.items.Add(item);
-            this.Vida += item.Defensa;
-            this.Ataque += item.Ataque;
+            this.defensa += item.GetDefensa();
+            this.ataque += item.GetAtaque();
         }
     }
 
@@ -68,30 +116,62 @@ public class Mago
             if (elemento == item)
             {
                 this.items.Remove(elemento);
-                this.Vida -= item.Defensa;
-                this.Ataque -= item.Ataque;
+                this.defensa -= item.GetDefensa();
+                this.ataque -= item.GetAtaque();
             }
         }
     }
 
     public void AtacarElfo(Elfo elfo)
     {
-        elfo.Vida -= this.Ataque;
+        if (this.ataque < elfo.GetDefensa())
+        {
+            Console.WriteLine("El ataque no pudo ser concretado");
+        }
+        else
+        {
+            int danoRealizado = this.ataque - elfo.GetDefensa();
+            elfo.GetDaño(danoRealizado);
+        }
     }
     
     public void AtacarEnano(Enano enano)
     {
-        enano.Vida -= this.Ataque;
+        if (this.Ataque < enano.GetDefensa())
+        {
+            Console.WriteLine("El ataque no pudo ser concretado");
+        }
+        else
+        {
+            int danoRealizado = this.ataque - enano.GetDefensa();
+            enano.GetDaño(danoRealizado);
+        }
     }
     
     public void AtacarOrco(Orco orco)
     {
-        orco.Vida -= this.Ataque;
+        if (this.Ataque < orco.GetDefensa())
+        {
+            Console.WriteLine("El ataque no pudo ser concretado");
+        }
+        else
+        {
+            int danoRealizado = this.ataque - orco.GetDefensa();
+            orco.GetDaño(danoRealizado);
+        }
     }
     
     public void AtacarMago(Mago mago)
     {
-        mago.Vida -= this.Ataque;
+        if (this.Ataque < mago.GetDefensa())
+        {
+            Console.WriteLine("El ataque no pudo ser concretado");
+        }
+        else
+        {
+            int danoRealizado = this.ataque - mago.GetDefensa();
+            mago.GetDaño(danoRealizado);
+        }
     }
 
     public void EquiparLibro(LibroDeHechizos libro)
@@ -99,6 +179,10 @@ public class Mago
         if (!this.libros.Contains(libro))
         {
             this.libros.Add(libro);
+        }
+        else
+        {
+            Console.WriteLine("El libro de hechizos ya fue equipado");
         }
     }
 
@@ -109,6 +193,10 @@ public class Mago
             if (elemento == libro)
             {
                 this.libros.Remove(elemento);
+            }
+            else
+            {
+                Console.WriteLine("No hay un libro de hechizos equipado");
             }
         }
     }

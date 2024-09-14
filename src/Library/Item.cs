@@ -2,9 +2,24 @@ namespace Library;
 
 public class Item
 {
-    public string Nombre { get; }
-    public int Defensa { get; }
-    public int Ataque { get; }
+    private string Nombre { get; }
+    private int Defensa { get; }
+    private int Ataque { get; }
+    
+    public string GetNombre()
+    {
+        return this.Nombre;
+    }
+    
+    public int GetDefensa()
+    {
+        return this.Defensa;
+    }
+    
+    public int GetAtaque()
+    {
+        return this.Ataque;
+    }
 
     public Item(string nombre, int defensa, int ataque)
     {
