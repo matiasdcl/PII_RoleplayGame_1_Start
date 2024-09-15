@@ -114,14 +114,15 @@ public class Elfo
 
     public void DesequiparItem(Item item)
     {
-        foreach (Item elemento in this.items.ToList())
+        if (this.items.Contains(item))
         {
-            if (elemento == item)
-            {
-                this.items.Remove(elemento);
-                this.Defensa -= item.GetDefensa();
-                this.Ataque -= item.GetAtaque();
-            }
+            this.items.Remove(item);
+            this.Vida -= item.GetDefensa();
+            this.Ataque -= item.GetAtaque();
+        }
+        else
+        {
+            Console.WriteLine("El personaje no tiene ese item.");
         }
     }
 
@@ -190,25 +191,25 @@ public class Elfo
 
     public void DesequiparLibro(LibroDeHechizos libro)
     {
-        foreach (LibroDeHechizos elemento in this.libros.ToList())
+        if (this.libros.Contains(libro))
         {
-            if (elemento == libro)
-            {
-                this.libros.Remove(elemento);
-            }
-            else
-            {
-                Console.WriteLine("No hay un libro de hechizos equipado");
-            }
+            this.libros.Remove(libro);
+        }
+        else
+        {
+            Console.WriteLine("El personaje no tiene ese libro.");
         }
     }
 
-    public void UsarHechizo(Hechizo hechizo)
+    public void UsarLibroDeHechizos(LibroDeHechizos libro)
     {
-        if (this.vida > 0)
+        if (this.libros.Contains(libro))
         {
-            return;
+            if (this.vida > 0)
+            {
+                return;
+            }
+            this.vida = libro.Hechizo.Vida;
         }
-        this.vida = hechizo.Vida;
     }
 }

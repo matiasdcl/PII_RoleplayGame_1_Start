@@ -2,10 +2,10 @@ namespace Library;
 
 public class LibroDeHechizos
 {
-    private List<Hechizo> listaDeHechizos = new List<Hechizo>();
-
-    public void AprenderHechizo(Hechizo hechizo)
+    public Hechizo Hechizo { get; }
+    public LibroDeHechizos(Hechizo hechizo)
     {
-        listaDeHechizos.Add(hechizo);
+        this.Hechizo = hechizo;
     }
+    
 }

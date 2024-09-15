@@ -23,7 +23,7 @@ public class Herramientas
     {
         if (estadistica < 0)
         {
-            throw new AggregateException("Valor de defensa o ataque inválidos");
+            throw new ArgumentException("Valor de defensa o ataque inválidos");
         }
     }
 }

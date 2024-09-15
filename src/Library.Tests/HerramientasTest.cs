@@ -1,4 +1,5 @@
 using Library;
+using System;
 using NUnit.Framework;
 
 namespace Library.Tests;
@@ -9,8 +10,20 @@ public class HerramientasTest
 {
 
     [Test]
-    public void METHOD()
+    public void TestValidarNombreVacio()
     {
-        
+        Assert.Throws<ArgumentException>(() => Herramientas.ValidarNombre(""));
+    }
+
+    [Test]
+    public void TestValidarNombreCaracteresNoPermitidos()
+    {
+       Assert.Throws<ArgumentException>(() => Herramientas.ValidarNombre("#@("));
+    }
+
+    [Test]
+    public void TestValidarEstadistica()
+    {
+        Assert.Throws<ArgumentException>(() => Herramientas.ValidarEstadistica(-100));
     }
 }

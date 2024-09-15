@@ -105,14 +105,15 @@ public class Enano
 
     public void DesequiparItem(Item item)
     {
-        foreach (Item elemento in this.items.ToList())
+        if (this.items.Contains(item))
         {
-            if (elemento == item)
-            {
-                this.items.Remove(elemento);
-                this.Vida -= item.GetDefensa();
-                this.Ataque -= item.GetAtaque();
-            }
+            this.items.Remove(item);
+            this.Vida -= item.GetDefensa();
+            this.Ataque -= item.GetAtaque();
+        }
+        else
+        {
+            Console.WriteLine("El personaje no tiene ese item.");
         }
     }
     

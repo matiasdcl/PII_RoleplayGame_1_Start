@@ -9,8 +9,10 @@ public class LibroDeHechizosTest
 {
 
     [Test]
-    public void METHOD()
+    public void TestHechizo()
     {
-        
+        Hechizo hechizo = new Hechizo("Revivir", 200, 0);
+        LibroDeHechizos libro = new LibroDeHechizos(hechizo);
+        Assert.That(libro.Hechizo,Is.EqualTo(hechizo));
     }
 }
