@@ -4,7 +4,7 @@ public class Herramientas
 {
     public static void ValidarNombre(string nombre)
     {
-        string caracteresPermitidos = "qQwWeErRtTyYuUiIoOpPsSaAdDFfGgHhJjKkLlÑñZzXxCcVvBbNnMm ";
+        string caracteresPermitidos = "qQwWeErRtTyYuUiIoOpPsSaAdDFfGgHhJjKkLlÑñZzXxCcVvBbNnMmáÁéÉíÍóÓúÚ ";
         foreach (char caracter in nombre.TrimStart())
         {
             if (!caracteresPermitidos.Contains(caracter))

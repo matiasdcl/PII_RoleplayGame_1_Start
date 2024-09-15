@@ -85,7 +85,14 @@ public class Enano
 
     public int GetDaño(int danoRealizado)
     {
-        return this.vida -= danoRealizado;
+        if (this.vida - danoRealizado < 0)
+        {
+            return this.vida = 0;
+        }
+        else
+        {
+            return this.vida -= danoRealizado;
+        }
     }
     
     public List<Item> GetEquipedItems()

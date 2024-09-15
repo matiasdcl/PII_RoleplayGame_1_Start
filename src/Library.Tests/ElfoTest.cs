@@ -1,5 +1,3 @@
-using System.Linq;
-using Library;
 using NUnit.Framework;
 
 namespace Library.Tests;
@@ -9,12 +7,85 @@ public class ElfoTest
 {
     
     [Test]
-    public void TestVidaDespuesDeAtaqueElfo()
+    public void TestGetVida()
+    {
+        Elfo legolas = new Elfo("Legolas");
+        int vida = legolas.GetVidaActual();
+        Assert.That(vida, Is.EqualTo(150));
+    }
+    
+    [Test]
+    public void TestGetAtaque()
+    {
+        Elfo legolas = new Elfo("Legolas");
+        int ataque = legolas.GetAtaque();
+        Assert.That(ataque, Is.EqualTo(40));
+    }
+    
+    [Test]
+    public void TestGetDefensa()
+    {
+        Elfo legolas = new Elfo("Legolas");
+        int ataque = legolas.GetDefensa();
+        Assert.That(ataque, Is.EqualTo(0));
+    }
+    
+    [Test]
+    public void TestGetNombre()
+    {
+        Elfo legolas = new Elfo("Legolas");
+        string nombre = legolas.GetNombre();
+        Assert.That(nombre, Is.EqualTo("Legolas"));
+    }
+    
+    [Test]
+    public void TestGetEquippedItems()
+    {
+        Elfo legolas = new Elfo("Legolas");
+        Assert.That(legolas.GetEquipedItems(), Is.Empty);
+    }
+    
+    [Test]
+    public void TestGetEquippedLibros()
+    {
+        Elfo legolas = new Elfo("Legolas");
+        Assert.That(legolas.GetEquipedLibros(), Is.Empty);
+    }
+    
+    [Test]
+    public void TestAtaqueElfoVsElfo()
     {
         Elfo legolas = new Elfo("Legolas");
         Elfo atacante = new Elfo("Eric");
-        atacante.AtacarElfo(legolas);
-        Assert.That(legolas.GetVidaActual(), Is.EqualTo(110) );
+        legolas.AtacarElfo(atacante);
+        Assert.That(atacante.GetVidaActual(), Is.EqualTo(110) );
+    }
+    
+    [Test]
+    public void TestAtaqueElfoVsOrco()
+    {
+        Elfo legolas = new Elfo("Legolas");
+        Orco grom = new Orco("Grom");
+        legolas.AtacarOrco(grom);
+        Assert.That(grom.GetVidaActual(), Is.EqualTo(180) );
+    }
+    
+    [Test]
+    public void TestAtaqueElfoVsMago()
+    {
+        Elfo legolas = new Elfo("Legolas");
+        Mago gandalf = new Mago("Gandalf");
+        legolas.AtacarMago(gandalf);
+        Assert.That(gandalf.GetVidaActual(), Is.EqualTo(50) );
+    }
+    
+    [Test]
+    public void TestAtaqueElfoVsEnano()
+    {
+        Elfo legolas = new Elfo("Legolas");
+        Enano minion = new Enano("minion");
+        legolas.AtacarEnano(minion);
+        Assert.That(minion.GetVidaActual(), Is.EqualTo(160) );
     }
 
     [Test]
@@ -27,6 +98,7 @@ public class ElfoTest
         Assert.That(legolas.GetAtaque(), Is.EqualTo(140));
         Item item2 = new Item("Escudo", 100, 0);
         legolas.EquiparItem(item2);
+        Assert.That(legolas.GetEquipedItems().Contains(item2), Is.True);
         Assert.That(legolas.GetDefensa(),Is.EqualTo(100));
     }
 
