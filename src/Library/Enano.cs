@@ -61,6 +61,7 @@ public class Enano
         this.vida = 200; 
         Herramientas.ValidarNombre(nombre);
         this.nombre = nombre;
+        this.items = new List<Item>();
     }
     
     public int GetVidaActual()
@@ -105,7 +106,7 @@ public class Enano
         if (!this.items.Contains(item))
         {
             this.items.Add(item);
-            this.Vida += item.GetDefensa();
+            this.Defensa += item.GetDefensa();
             this.Ataque += item.GetAtaque();
         }
     }

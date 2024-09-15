@@ -42,7 +42,7 @@ public class EnanoTest
     public void TestGetEquippedItems()
     {
         Enano minion = new Enano("minion");
-        Assert.That(minion.GetEquipedItems(), Is.Empty);
+        Assert.That(minion.GetEquipedItems().Count, Is.EqualTo(0));
     }
     
     [Test]
@@ -88,7 +88,7 @@ public class EnanoTest
         Enano minion = new Enano("minion");
         minion.EquiparItem(item1);
         Assert.That(minion.GetEquipedItems().Contains(item1), Is.True);
-        Assert.That(minion.GetAtaque(), Is.EqualTo(300));
+        Assert.That(minion.GetAtaque(), Is.EqualTo(190));
         Item item2 = new Item("Tunica", 90, 0);
         minion.EquiparItem(item2);
         Assert.That(minion.GetEquipedItems().Contains(item2), Is.True);
@@ -103,6 +103,6 @@ public class EnanoTest
         minion.EquiparItem(item);
         minion.DesequiparItem(item);
         Assert.That(minion.GetEquipedItems().Contains(item), Is.False);
-        Assert.That(minion.GetAtaque(),Is.EqualTo(200));
+        Assert.That(minion.GetAtaque(),Is.EqualTo(40));
     }
 }

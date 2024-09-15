@@ -61,6 +61,7 @@ public class Orco
         defensa = 0;
         Herramientas.ValidarNombre(nombre);
         this.nombre = nombre;
+        this.items = new List<Item>();
     }
 
     public int GetVidaActual()
@@ -106,7 +107,7 @@ public class Orco
         {
             this.items.Add(item);
             this.defensa += item.GetDefensa();
-            this.ataque += item.GetDefensa();
+            this.ataque += item.GetAtaque();
         }
     }
 

@@ -43,7 +43,7 @@ public class OrcoTest
     public void TestGetEquippedItems()
     {
         Orco grom = new Orco("Grom");
-        Assert.That(grom.GetEquipedItems(), Is.Empty);
+        Assert.That(grom.GetEquipedItems().Count, Is.EqualTo(0));
     }
     
     [Test]
