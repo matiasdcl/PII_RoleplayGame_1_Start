@@ -20,8 +20,7 @@ public class Program
         
          Enano krenko = new Enano("Krenko");
          krenko.AtacarElfo(legolas);
-         Console.WriteLine(legolas.GetVidaActual());
-         legolas.AtacarEnano(krenko);
+         Console.WriteLine(legolas.GetVidaActual()); legolas.AtacarEnano(krenko);
          Console.WriteLine(krenko.GetVidaActual());
     }
 }
